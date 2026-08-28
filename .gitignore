@@ -29,6 +29,15 @@ Thumbs.db
 # vercel
 .vercel
 
+# local dumps — not part of the site
+/public/*.mp4
+/public/DSC*.jpeg
+/public/2E60C283-C4E8-44D6-9134-B22A00CB2826.jpg
+/public/5E556B81-47D6-4459-85AA-0FCE47C3EE9A.jpg
+/public/A0A3EE88-B219-4710-955A-1F3425C82307.jpg
+/public/B42E8292-88F2-4F3A-BF47-6B8ED3728ED3.jpg
+/public/Edéndayparty.png
+
 # typescript
 next-env.d.ts
 *.tsbuildinfo
