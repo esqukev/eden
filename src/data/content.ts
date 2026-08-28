@@ -16,3 +16,8 @@ export const upcomingEvents: UpcomingEvent[] = [
   { id: "eden-ii", title: "Por anunciar" },
   { id: "eden-iii", title: "Por anunciar" },
 ];
+
+export const umbral = {
+  left: "Las noches se anuncian.",
+  right: "La puerta es el Edén.",
+} as const;

@@ -1,0 +1,107 @@
+.field {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb,
+.scan,
+.rail,
+.tick,
+.spark {
+  position: absolute;
+  will-change: transform;
+}
+
+.orb {
+  top: 0;
+  left: 0;
+  width: 72vmax;
+  height: 72vmax;
+  margin: -36vmax 0 0 -36vmax;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(236 230 216 / 0.08) 0%,
+    rgb(236 230 216 / 0.02) 42%,
+    transparent 70%
+  );
+}
+
+.orbB {
+  width: 54vmax;
+  height: 54vmax;
+  margin: -27vmax 0 0 -27vmax;
+  background: radial-gradient(
+    circle,
+    rgb(236 230 216 / 0.05) 0%,
+    transparent 68%
+  );
+}
+
+.scan {
+  left: 0;
+  right: 0;
+  height: 140px;
+  margin-top: -70px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(236 230 216 / 0.035),
+    transparent
+  );
+}
+
+.rail {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--bone) 9%, transparent);
+}
+
+.railL {
+  left: var(--pad);
+}
+
+.railR {
+  right: var(--pad);
+}
+
+.tick {
+  left: var(--pad);
+  width: 9px;
+  height: 1px;
+  margin-left: -4px;
+  background: color-mix(in srgb, var(--bone) 32%, transparent);
+}
+
+.spark {
+  width: 9px;
+  height: 9px;
+}
+
+.glyph {
+  display: block;
+  width: 9px;
+  height: 9px;
+  fill: color-mix(in srgb, var(--bone) 34%, transparent);
+}
+
+.sparkL {
+  left: var(--pad);
+  margin-left: -4px;
+}
+
+.sparkR {
+  left: auto;
+  right: var(--pad);
+  margin-right: -4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field {
+    display: none;
+  }
+}

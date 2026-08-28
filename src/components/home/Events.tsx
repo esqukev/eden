@@ -30,7 +30,7 @@ export function Events() {
 
       if (!reduce && panes.length) {
         gsap.set(panes, { scaleY: 1 });
-        gsap.set([head, viewport], { autoAlpha: 0, y: 28 });
+        gsap.set([head, viewport], { autoAlpha: 0 });
 
         gsap
           .timeline({
@@ -43,9 +43,8 @@ export function Events() {
               invalidateOnRefresh: true,
             },
           })
-          .to(panes, { scaleY: 0, stagger: 0.1, duration: 0.7 }, 0)
-          .to([head, viewport], { autoAlpha: 1, y: 0, duration: 0.35 }, 0.28)
-          .from(flyers, { y: 64, autoAlpha: 0, stagger: 0.08, duration: 0.4 }, 0.32);
+          .to(panes, { scaleY: 0, duration: 0.7 }, 0)
+          .to([head, viewport], { autoAlpha: 1, duration: 0.35 }, 0.28);
       }
 
       const syncActive = () => {
@@ -134,7 +133,7 @@ export function Events() {
         </div>
 
         <header className={styles.head} data-head>
-          <p className={styles.kicker}>Próximos</p>
+          <p className={styles.kicker}>Próximos eventos</p>
         </header>
 
         <div className={styles.viewport} data-viewport>
