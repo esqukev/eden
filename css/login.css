@@ -1,0 +1,156 @@
+.body{
+    background-image: url("../imagenes/BG\ IMAGE.jpeg");
+    background-size: cover;
+    height: 500px;
+}
+
+.header {
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.133);
+    box-shadow: 0 8px 8px 0 rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(0, 0, 0, 0.133);
+}
+
+.header-decor {
+    cursor: pointer;
+    float: left;
+    background-color: #00000000;
+    color: white;
+    flex-shrink: 0%;
+    border: none;
+    padding-right: 30px;
+}
+
+
+.sesion {
+    padding: 8px;
+    background-color: rgba(40, 181, 172, 0.882);
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.sesion:hover {
+    background-color: rgba(56, 117, 143, 0.786);
+    transition: 1.5s;
+}
+
+.fondo2{
+    padding-top: 130px;
+    padding-bottom: 130px;
+}
+
+.box_user {
+    border-radius: 20px;
+    width: 500px;
+    height: 480px;
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(1px);
+    border: 1px solid rgba(9, 9, 9, 0.18);
+}
+
+.box-content {
+    margin-top: 40px;
+}
+
+.titulo1 {
+    color: rgba(253, 254, 254, 0.93);
+    font-weight: light;
+    font-size: 35px;
+}
+
+.usuario {
+    border: none;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: 1s;
+    outline: none;
+}
+
+.usuario:focus {
+    box-shadow: 0px 0px 8px rgb(75, 176, 82);
+}
+
+.entrar { 
+    background-color: rgba(28, 29, 29, 0.632);
+    border: none;
+    box-shadow: 0 4px 16px 0 rgba(97, 85, 112, 0.503);
+}
+
+.link{
+    text-decoration: none;
+}
+
+.entrar:hover {
+    background-color: rgba(97, 85, 112, 0.741);
+    transition: 1.5s;
+}
+
+.footer {
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.133);
+    box-shadow: 0 8px 8px 0 rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(0, 0, 0, 0.133);
+}
+
+.iconos-footer {
+    font-size: 8px;
+    border: none;
+    background-color: rgba(65, 104, 36, 0);
+}
+
+.error {
+    border: red solid 1px;
+}
+
+#forgot-pass {
+    font-weight: bold;
+    text-align: end;
+    font-size: 12px;
+}
+
+/*codigo externo*/
+
+p {
+    font-size: 18px;
+}
+
+header {
+    background-color: #0063be;
+}
+
+.usuario {
+    width: 70%;
+}
+
+a {
+    font-weight: bold;
+    color: #f5f6f8;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #7500be;
+    text-decoration: underline;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+input:checked {
+    background-color: #0063be !important;
+}
+
+input,
+select {
+    cursor: pointer;
+}
