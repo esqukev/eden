@@ -26,23 +26,6 @@
   height: 100%;
 }
 
-.end {
-  display: flex;
-  justify-content: flex-end;
-  padding: 1.4rem var(--pad) 2.4rem;
-}
-
-.end a {
-  font-size: 0.66rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--dust);
-}
-
-.end a:hover {
-  color: var(--bone);
-}
-
 @media (max-width: 767px) {
   .scene {
     height: 180vh;

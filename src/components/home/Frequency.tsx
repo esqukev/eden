@@ -314,11 +314,6 @@ export function Frequency() {
           <canvas className={styles.canvas} data-canvas />
         </div>
       </div>
-      <footer className={styles.end}>
-        <a href={site.instagram} target="_blank" rel="noreferrer">
-          Instagram
-        </a>
-      </footer>
     </section>
   );
 }
