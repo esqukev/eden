@@ -1,0 +1,50 @@
+.footer {
+  position: relative;
+  padding: 8vh 0 2.4rem;
+  overflow: hidden;
+  background: var(--ink);
+  border-top: 1px solid color-mix(in srgb, var(--bone) 12%, transparent);
+}
+
+.wordmark {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(4.5rem, 16vw, 18rem);
+  letter-spacing: -0.08em;
+  line-height: 0.75;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-left: var(--pad);
+  color: var(--bone);
+  will-change: transform;
+}
+
+.grid {
+  margin-top: 6vh;
+  padding: 0 var(--pad);
+  display: grid;
+  gap: 1.4rem;
+}
+
+.links,
+.social,
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.4rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.legal {
+  color: var(--dust);
+}
+
+@media (min-width: 800px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: end;
+  }
+}

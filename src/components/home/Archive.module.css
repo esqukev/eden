@@ -1,0 +1,49 @@
+.section {
+  background: var(--void);
+  padding: 0 var(--pad) 0;
+}
+
+.frame {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  border-top: 1px solid color-mix(in srgb, var(--bone) 16%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--bone) 16%, transparent);
+}
+
+.still {
+  position: absolute;
+  inset: -8%;
+  width: 116%;
+  height: 116%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 48% 42%;
+  filter: saturate(0.86) contrast(1.08);
+  will-change: transform;
+}
+
+.meta {
+  position: absolute;
+  left: var(--pad);
+  right: var(--pad);
+  bottom: 8vh;
+  z-index: 1;
+  max-width: 28rem;
+  mix-blend-mode: difference;
+}
+
+.meta h2 {
+  margin: 0.8rem 0 0.6rem;
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  line-height: 1.15;
+}
+
+.credit {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}

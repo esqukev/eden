@@ -1,0 +1,78 @@
+.section {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--ink);
+  padding: calc(var(--nav-h) + 2rem) var(--pad) 5rem;
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+}
+
+.wash img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.2);
+}
+
+.giant {
+  position: absolute;
+  left: -6vw;
+  bottom: -8vh;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(6rem, 22vw, 20rem);
+  letter-spacing: -0.08em;
+  line-height: 0.75;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--bone) 22%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+.block {
+  position: relative;
+  z-index: 1;
+  max-width: 54rem;
+}
+
+.block h2 {
+  margin: 1.2rem 0 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.line {
+  display: block;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6.4vw, 5.4rem);
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+}
+
+.body {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--bone) 82%, transparent);
+}
+
+.highlight {
+  margin-top: 2rem;
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+}
+
+.highlight em {
+  font-style: italic;
+  color: var(--signal);
+}

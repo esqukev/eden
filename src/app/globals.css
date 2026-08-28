@@ -1,0 +1,137 @@
+:root {
+  --void: #070605;
+  --ink: #0c0b0a;
+  --bone: #e7e1d4;
+  --dust: #8a8478;
+  --ash: #3a3732;
+  --signal: #c8f542;
+  --blood: #c43c28;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --pad: clamp(1.1rem, 3vw, 2.4rem);
+  --nav-h: 5.5rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background: var(--void);
+  color: var(--bone);
+  min-height: 100%;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ash) var(--void);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+  cursor: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.is-menu-open {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+a {
+  color: inherit;
+  font: inherit;
+  cursor: none;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--void);
+}
+
+:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.kicker {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+
+.char,
+.word,
+.line {
+  display: inline-block;
+}
+
+.char {
+  font-kerning: none;
+  text-rendering: optimizeSpeed;
+}
+
+@media (pointer: coarse) {
+  body,
+  button,
+  a {
+    cursor: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
