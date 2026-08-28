@@ -142,7 +142,7 @@ export function Events() {
             {upcomingEvents.map((event) => (
               <article key={event.id} className={styles.flyer} data-flyer>
                 <span className={styles.media} data-media>
-                  <img src={event.flyer} alt={event.title} />
+                  <span className={styles.hold}>Por anunciar</span>
                 </span>
                 <span className={styles.caption}>
                   <span className={styles.capTitle}>{event.title}</span>
