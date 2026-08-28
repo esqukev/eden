@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono } from "next/font/google";
 import { Providers } from "@/components/experience/Providers";
 import { Loader } from "@/components/experience/Loader";
-import { Cursor } from "@/components/experience/Cursor";
 import { Navigation } from "@/components/nav/Navigation";
 import "./globals.css";
 import "lenis/dist/lenis.css";
@@ -32,7 +31,10 @@ export const metadata: Metadata = {
     images: ["/images/crowd.jpg"],
   },
   icons: {
-    icon: "/images/favicon-32x32.png",
+    icon: [
+      { url: "/images/eden-favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
     apple: "/apple-touch-icon.png",
   },
 };
@@ -49,7 +51,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Providers>
           <Loader />
-          <Cursor />
           <Navigation />
           {children}
         </Providers>

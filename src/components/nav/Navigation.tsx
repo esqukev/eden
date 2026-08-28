@@ -67,7 +67,7 @@ export function Navigation() {
   return (
     <>
       <header className={styles.nav} data-open={open}>
-        <a href="#top" className={styles.brand} data-cursor="hover" onClick={goTo("#top")}>
+        <a href="#top" className={styles.brand} onClick={goTo("#top")}>
           <EdenMark tone="white" />
           <span className="sr-only">{site.wordmark}</span>
         </a>
@@ -76,7 +76,6 @@ export function Navigation() {
           className={styles.toggle}
           aria-expanded={open}
           aria-controls="site-menu"
-          data-cursor="hover"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? "Cerrar" : "Menú"}
@@ -96,7 +95,6 @@ export function Navigation() {
               key={item.id}
               href={item.href}
               data-item
-              data-cursor="hover"
               onClick={goTo(item.href)}
             >
               <span className={styles.num}>0{i + 1}</span>

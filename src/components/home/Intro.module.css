@@ -1,10 +1,12 @@
 .section {
+  position: relative;
+  z-index: 1;
   background: var(--void);
   color: var(--bone);
 }
 
 .scene {
-  height: 240vh;
+  height: 260vh;
 }
 
 .sticky {
@@ -13,13 +15,14 @@
   height: 100dvh;
   min-height: 540px;
   overflow: hidden;
+  background: var(--void);
 }
 
 .gate {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  clip-path: inset(47.5% 22% 47.5% 22%);
+  clip-path: inset(50% 50% 50% 50%);
   will-change: clip-path;
 }
 
@@ -44,36 +47,8 @@
   background: linear-gradient(to top, rgba(8, 7, 4, 0.86) 0%, transparent 46%);
 }
 
-.copy {
-  position: absolute;
-  left: var(--pad);
-  right: var(--pad);
-  bottom: 9vh;
-  z-index: 2;
-  max-width: min(92vw, 36rem);
-}
-
-.copy p {
-  font-size: 0.66rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--bone) 62%, transparent);
-  margin-bottom: 0.7rem;
-}
-
-.copy h2 {
-  font-weight: 400;
-  font-size: clamp(1.15rem, 2.5vw, 1.7rem);
-  letter-spacing: 0.06em;
-  line-height: 1.35;
-}
-
 @media (max-width: 767px) {
   .scene {
-    height: 190vh;
-  }
-
-  .gate {
-    clip-path: inset(46% 8% 46% 8%);
+    height: 210vh;
   }
 }

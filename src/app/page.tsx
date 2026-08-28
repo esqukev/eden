@@ -1,7 +1,7 @@
 import { Events } from "@/components/home/Events";
+import { Frequency } from "@/components/home/Frequency";
 import { Hero } from "@/components/home/Hero";
 import { Intro } from "@/components/home/Intro";
-import { Tickets } from "@/components/home/Tickets";
 
 export default function HomePage() {
   return (
@@ -9,7 +9,7 @@ export default function HomePage() {
       <Hero />
       <Intro />
       <Events />
-      <Tickets />
+      <Frequency />
     </main>
   );
 }

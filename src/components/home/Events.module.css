@@ -1,7 +1,7 @@
 .section {
   position: relative;
-  z-index: 8;
-  height: 280vh;
+  z-index: 4;
+  min-height: 100dvh;
   background: var(--void);
   color: var(--bone);
 }
@@ -14,6 +14,27 @@
   display: grid;
   grid-template-rows: auto 1fr;
   overflow: hidden;
+  background: var(--void);
+}
+
+.shutter {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: flex;
+  pointer-events: none;
+}
+
+.shutter i {
+  flex: 1;
+  background: var(--void);
+  transform: scaleY(0);
+  transform-origin: top center;
+  will-change: transform;
+}
+
+.shutter i:nth-child(even) {
+  transform-origin: bottom center;
 }
 
 .head {
@@ -31,13 +52,14 @@
   overflow: hidden;
   display: flex;
   align-items: center;
+  min-height: 0;
 }
 
 .track {
   display: flex;
   align-items: flex-end;
   gap: 1.6rem;
-  padding: 0 18vw 8vh 8vw;
+  padding: 0 18vw 7vh 8vw;
   width: max-content;
   will-change: transform;
 }
@@ -108,7 +130,6 @@
   .sticky {
     position: relative;
     height: auto;
-    display: block;
     overflow: visible;
   }
 

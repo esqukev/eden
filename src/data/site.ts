@@ -11,5 +11,5 @@ export const navItems = [
   { id: "inicio", label: "Inicio", href: "#top" },
   { id: "experiencia", label: "Experiencia", href: "#intro" },
   { id: "eventos", label: "Eventos", href: "#eventos" },
-  { id: "tiquetes", label: "Tiquetes", href: "#tiquetes" },
+  { id: "frecuencia", label: "Frecuencia", href: "#frecuencia" },
 ] as const;
