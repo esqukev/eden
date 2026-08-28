@@ -1,50 +1,58 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Lenis from "lenis";
-import "lenis/dist/lenis.css";
+import { useEffect } from "react";
+import { ReactLenis, useLenis } from "lenis/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { useExperience } from "./ExperienceProvider";
 
-export function LenisProvider({ children }: { children: React.ReactNode }) {
-  const { menuOpen } = useExperience();
-  const lenisRef = useRef<Lenis | null>(null);
+function LenisGsapSync() {
+  const lenis = useLenis();
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const lenis = new Lenis({
-      autoRaf: false,
-      lerp: reduce ? 1 : 0.075,
-      smoothWheel: !reduce,
-      syncTouch: false,
-    });
+    if (!lenis) return;
 
-    lenisRef.current = lenis;
-    lenis.on("scroll", ScrollTrigger.update);
+    const onScroll = () => ScrollTrigger.update();
+    lenis.on("scroll", onScroll);
 
-    const onTick = (time: number) => {
+    const tick = (time: number) => {
       lenis.raf(time * 1000);
     };
 
-    gsap.ticker.add(onTick);
+    gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
-    const onResize = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", onResize);
+    const refresh = () => ScrollTrigger.refresh();
+    const fonts = document.fonts?.ready.then(refresh);
+    window.addEventListener("load", refresh);
+
+    requestAnimationFrame(refresh);
 
     return () => {
-      window.removeEventListener("resize", onResize);
-      gsap.ticker.remove(onTick);
-      lenis.destroy();
-      lenisRef.current = null;
+      lenis.off("scroll", onScroll);
+      gsap.ticker.remove(tick);
+      window.removeEventListener("load", refresh);
+      void fonts;
     };
-  }, []);
+  }, [lenis]);
 
-  useEffect(() => {
-    if (!lenisRef.current) return;
-    if (menuOpen) lenisRef.current.stop();
-    else lenisRef.current.start();
-  }, [menuOpen]);
+  return null;
+}
 
-  return children;
+export function LenisProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <ReactLenis
+      root
+      options={{
+        autoRaf: false,
+        lerp: 0.075,
+        smoothWheel: true,
+        anchors: true,
+        wheelMultiplier: 0.88,
+        touchMultiplier: 1.15,
+        syncTouch: false,
+      }}
+    >
+      <LenisGsapSync />
+      {children}
+    </ReactLenis>
+  );
 }

@@ -1,0 +1,31 @@
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid color-mix(in srgb, var(--bone) 14%, transparent);
+  background: var(--void);
+  padding: 0.55rem 0;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.seq {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 2.4rem;
+  padding-right: 2.4rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--dust);
+  white-space: nowrap;
+}
+
+.seq span + span::before {
+  content: none;
+}

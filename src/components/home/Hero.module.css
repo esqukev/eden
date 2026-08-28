@@ -1,236 +1,72 @@
 .hero {
-  position: relative;
-  height: 100dvh;
-  min-height: 640px;
-  overflow: hidden;
+  height: 280vh;
   background: var(--void);
   color: var(--bone);
-  isolation: isolate;
 }
 
-.visual {
-  position: absolute;
-  inset: 0;
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  min-height: 540px;
+  overflow: hidden;
 }
 
-.slit {
+.gate {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  clip-path: inset(11% 38% 11% 38%);
   will-change: clip-path;
 }
 
 .photo {
+  position: absolute;
+  inset: 0;
+}
+
+.photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 52% 38%;
-  transform: scale(1.06);
-  filter: saturate(0.82) contrast(1.08) brightness(0.82);
-  will-change: transform;
+  filter: saturate(0.84) contrast(1.1) brightness(0.72);
 }
 
-.lens {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: min(30vmin, 260px);
-  height: min(30vmin, 260px);
-  border-radius: 50%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 3;
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--bone) 40%, transparent);
-  will-change: transform;
-}
-
-.lens img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100dvh;
-  max-width: none;
-  object-fit: cover;
-  object-position: 52% 38%;
-  filter: contrast(1.28) saturate(1.4) brightness(0.95);
-  will-change: transform;
-}
-
-.vignette {
+.shade {
   position: absolute;
   inset: 0;
+  opacity: 0.35;
   background:
-    linear-gradient(to top, rgba(7, 6, 5, 0.78) 0%, transparent 42%),
-    linear-gradient(to bottom, rgba(7, 6, 5, 0.35) 0%, transparent 28%);
+    linear-gradient(to top, rgba(8, 7, 4, 0.88) 0%, transparent 42%),
+    linear-gradient(to bottom, rgba(8, 7, 4, 0.22) 0%, transparent 22%);
   pointer-events: none;
-  z-index: 2;
 }
 
-.veil {
+.mark {
   position: absolute;
   inset: 0;
-  background: var(--void);
-  transform: translateY(100%);
   z-index: 4;
+  display: grid;
+  place-items: center;
   pointer-events: none;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
-.introMark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(18vw, 140px);
-  height: auto;
-  transform: translate(-50%, -50%);
-  z-index: 6;
-  filter: invert(1);
-  pointer-events: none;
-}
-
-.metaRow {
-  position: absolute;
-  top: calc(var(--nav-h) + 0.4rem);
-  left: var(--pad);
-  right: var(--pad);
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  pointer-events: none;
-}
-
-.meta {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  mix-blend-mode: difference;
-}
-
-.line {
-  flex: 1;
-  height: 1px;
-  background: var(--bone);
-  transform-origin: left center;
-  opacity: 0.55;
-}
-
-.titleWrap {
-  position: absolute;
-  left: -3vw;
-  right: -6vw;
-  bottom: 11vh;
-  z-index: 5;
-  mix-blend-mode: difference;
-  pointer-events: none;
-  will-change: transform;
-}
-
-.sub {
-  font-family: var(--font-serif), serif;
-  font-style: italic;
-  font-size: clamp(1.1rem, 2.4vw, 2rem);
-  margin: 0 0 0.4rem 8vw;
-}
-
-.title {
-  font-family: var(--font-display), sans-serif;
-  font-weight: 800;
-  font-size: clamp(4.2rem, 12.4vw, 15rem);
-  letter-spacing: -0.07em;
-  line-height: 0.78;
-  white-space: nowrap;
-  text-transform: uppercase;
-}
-
-.cue {
-  position: absolute;
-  right: var(--pad);
-  bottom: 2.2rem;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.7rem;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.64rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  mix-blend-mode: difference;
-}
-
-.cue i {
-  display: block;
-  width: 1px;
-  height: 4.2rem;
-  background: currentColor;
-  transform-origin: top;
-  animation: drop 1.8s var(--ease-out) infinite;
-}
-
-@keyframes drop {
-  0% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  35% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scaleY(1) translateY(12px);
-    opacity: 0;
-  }
-}
-
-@media (pointer: coarse) {
-  .lens {
-    display: none;
-  }
+.mark img {
+  width: min(72vw, 34rem);
 }
 
 @media (max-width: 767px) {
   .hero {
-    min-height: 100dvh;
+    height: 200vh;
   }
 
-  .metaRow {
-    flex-direction: column;
-    align-items: flex-start;
+  .gate {
+    clip-path: inset(18% 10% 18% 10%);
   }
 
-  .line {
-    width: 40%;
-    flex: none;
-  }
-
-  .titleWrap {
-    left: var(--pad);
-    right: auto;
-    bottom: 18vh;
-  }
-
-  .title {
-    white-space: normal;
-    font-size: clamp(3.4rem, 18vw, 5.6rem);
-    max-width: 92vw;
-  }
-
-  .sub {
-    margin-left: 0;
-  }
-
-  .cue {
-    bottom: 1.4rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cue i {
-    animation: none;
-    opacity: 0.6;
+  .mark img {
+    width: 82vw;
   }
 }

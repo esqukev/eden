@@ -1,0 +1,49 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: difference;
+}
+
+.dot,
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  background: var(--bone);
+}
+
+.ring {
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 1px solid color-mix(in srgb, var(--bone) 65%, transparent);
+  transition: width 0.4s ease, height 0.4s ease, margin 0.4s ease, background 0.4s ease;
+}
+
+.root[data-state="hover"] .ring,
+.root[data-state="event"] .ring {
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+}
+
+.root[data-state="event"] .ring {
+  background: color-mix(in srgb, var(--bone) 18%, transparent);
+}
+
+@media (pointer: coarse) {
+  .root {
+    display: none;
+  }
+}

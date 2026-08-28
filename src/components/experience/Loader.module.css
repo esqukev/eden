@@ -1,0 +1,26 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+  background: var(--void);
+  will-change: transform;
+}
+
+.mark {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.mark img {
+  width: min(72vw, 34rem);
+}

@@ -1,0 +1,17 @@
+.mark {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  pointer-events: none;
+  user-select: none;
+  mix-blend-mode: screen;
+}
+
+.bone {
+  filter: grayscale(1) contrast(1.18) brightness(1.22);
+}
+
+.white {
+  filter: grayscale(1) contrast(1.2) brightness(1.85);
+}

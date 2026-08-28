@@ -1,78 +1,112 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useLenis } from "lenis/react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { useExperience } from "@/components/experience/ExperienceProvider";
-import { site } from "@/data/site";
+import { navItems, site } from "@/data/site";
+import { EdenMark } from "@/components/brand/EdenMark";
 import styles from "./Navigation.module.css";
 
-function CostaRicaClock() {
-  const ref = useRef<HTMLTimeElement>(null);
-
-  useGSAP(() => {
-    const el = ref.current;
-    if (!el) return;
-    const tick = () => {
-      el.textContent = new Intl.DateTimeFormat("en-GB", {
-        timeZone: site.timezone,
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-      }).format(new Date());
-    };
-    tick();
-    const id = window.setInterval(tick, 1000);
-    return () => window.clearInterval(id);
-  });
-
-  return <time ref={ref} className={styles.clock} dateTime="" />;
-}
-
 export function Navigation() {
-  const root = useRef<HTMLElement>(null);
-  const { introDone, menuOpen, setMenuOpen } = useExperience();
+  const overlay = useRef<HTMLDivElement>(null);
+  const first = useRef(true);
+  const [open, setOpen] = useState(false);
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (!lenis) return;
+    if (open) lenis.stop();
+    else lenis.start();
+  }, [open, lenis]);
 
   useGSAP(
     () => {
-      gsap.to(root.current, {
-        autoAlpha: introDone ? 1 : 0,
-        y: introDone ? 0 : -12,
-        duration: 0.9,
-        ease: "power3.out",
-      });
+      const panel = overlay.current;
+      if (!panel) return;
+
+      if (first.current) {
+        first.current = false;
+        gsap.set(panel, { display: "none", autoAlpha: 0 });
+        if (!open) return;
+      }
+
+      const links = panel.querySelectorAll("[data-item]");
+
+      if (open) {
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+        tl.set(panel, { display: "grid" })
+          .to(panel, { autoAlpha: 1, duration: 0.35 })
+          .fromTo(
+            links,
+            { yPercent: 100 },
+            { yPercent: 0, duration: 0.8, stagger: 0.07, ease: "power4.out" },
+            0.12,
+          );
+      } else {
+        const tl = gsap.timeline({ defaults: { ease: "power3.in" } });
+        tl.to(links, { yPercent: -80, duration: 0.35, stagger: 0.04 })
+          .to(panel, { autoAlpha: 0, duration: 0.3 }, 0.1)
+          .set(panel, { display: "none" });
+      }
     },
-    { dependencies: [introDone], scope: root },
+    { dependencies: [open], scope: overlay },
   );
 
+  const goTo = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    const wasOpen = open;
+    setOpen(false);
+    const run = () => {
+      lenis?.start();
+      lenis?.scrollTo(href, { offset: 0, duration: 1.4 });
+    };
+    if (wasOpen) window.setTimeout(run, 420);
+    else run();
+  };
+
   return (
-    <header ref={root} className={styles.nav} data-open={menuOpen} data-ready={introDone}>
-      <a href="#top" className={styles.brand} data-cursor="hover" data-cursor-label="Home">
-        <img src="/images/mark.png" alt="" className={styles.mark} width={40} height={48} />
-        <span className={styles.word}>{site.name}</span>
-      </a>
+    <>
+      <header className={styles.nav} data-open={open}>
+        <a href="#top" className={styles.brand} data-cursor="hover" onClick={goTo("#top")}>
+          <EdenMark tone="white" />
+          <span className="sr-only">{site.wordmark}</span>
+        </a>
+        <button
+          type="button"
+          className={styles.toggle}
+          aria-expanded={open}
+          aria-controls="site-menu"
+          data-cursor="hover"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? "Cerrar" : "Menú"}
+        </button>
+      </header>
 
-      <div className={styles.meta}>
-        <span>{site.cityCode}</span>
-        <span className={styles.dot} />
-        <CostaRicaClock />
-      </div>
-
-      <button
-        type="button"
-        className={styles.toggle}
-        aria-expanded={menuOpen}
-        aria-controls="site-menu"
-        data-cursor="menu"
-        data-cursor-label={menuOpen ? "Close" : "Menu"}
-        onClick={() => setMenuOpen(!menuOpen)}
+      <div
+        ref={overlay}
+        id="site-menu"
+        className={styles.overlay}
+        data-lenis-prevent
+        aria-hidden={!open}
       >
-        <span className={styles.toggleIndex}>{menuOpen ? "Cerrar" : "Menú"}</span>
-        <span className={styles.bars} aria-hidden="true">
-          <i />
-          <i />
-        </span>
-      </button>
-    </header>
+        <nav className={styles.menu} aria-label="Principal">
+          {navItems.map((item, i) => (
+            <a
+              key={item.id}
+              href={item.href}
+              data-item
+              data-cursor="hover"
+              onClick={goTo(item.href)}
+            >
+              <span className={styles.num}>0{i + 1}</span>
+              <span className={styles.mask}>
+                <span>{item.label}</span>
+              </span>
+            </a>
+          ))}
+        </nav>
+      </div>
+    </>
   );
 }
