@@ -26,6 +26,22 @@
   height: 100%;
 }
 
+.mark {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.mark[hidden] {
+  display: none;
+}
+
+.mark img {
+  width: min(78vw, 34rem);
+}
+
 @media (max-width: 767px) {
   .scene {
     height: 180vh;

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 import { useLenis } from "lenis/react";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { EdenMark } from "@/components/brand/EdenMark";
 import { site } from "@/data/site";
 import styles from "./Frequency.module.css";
 
@@ -20,24 +21,27 @@ const VERT = /* glsl */ `
   uniform float uHasMouse;
   varying float vBright;
   varying float vGlow;
+  varying float vAppear;
 
   void main() {
-    float assemble = mix(0.62, 0.88, smoothstep(0.0, 0.8, uProgress));
+    float appear = smoothstep(0.0, 0.2, uProgress);
+    float assemble = smoothstep(0.18, 0.88, uProgress);
     vec3 pos = mix(aChaos, aLogo, assemble);
     pos.z += sin(uTime * 0.65 + aSeed * 6.28318) * mix(0.07, 0.018, assemble);
 
     float dist = length(pos.xy - uMouse);
-    float near = uHasMouse * (1.0 - smoothstep(0.08, 1.15, dist));
+    float near = appear * uHasMouse * (1.0 - smoothstep(0.08, 1.15, dist));
     pos.xy += normalize(pos.xy - uMouse + vec2(0.0001)) * near * 0.28;
     pos.z += near * 0.32;
 
     vBright = aBright;
     vGlow = near;
+    vAppear = appear;
 
     vec4 mv = modelViewMatrix * vec4(pos, 1.0);
     gl_Position = projectionMatrix * mv;
     float size = mix(1.8, 4.6, aBright) + near * 4.5;
-    gl_PointSize = size * uPixelRatio * (2.4 / max(1.2, -mv.z));
+    gl_PointSize = size * appear * uPixelRatio * (2.4 / max(1.2, -mv.z));
   }
 `;
 
@@ -45,6 +49,7 @@ const FRAG = /* glsl */ `
   precision highp float;
   varying float vBright;
   varying float vGlow;
+  varying float vAppear;
 
   void main() {
     vec2 p = gl_PointCoord - 0.5;
@@ -52,7 +57,7 @@ const FRAG = /* glsl */ `
     if (d > 0.5) discard;
     vec3 bone = vec3(0.925, 0.902, 0.847);
     vec3 color = bone * mix(0.55, 1.0, vBright);
-    float alpha = smoothstep(0.5, 0.12, d) * mix(0.55, 1.0, vBright + vGlow);
+    float alpha = smoothstep(0.5, 0.12, d) * mix(0.55, 1.0, vBright + vGlow) * vAppear;
     gl_FragColor = vec4(color, alpha);
   }
 `;
@@ -137,9 +142,12 @@ export function Frequency() {
       const canvas = el.querySelector<HTMLCanvasElement>("[data-canvas]");
       const sceneEl = el.querySelector<HTMLElement>("[data-scene]");
       const stage = el.querySelector<HTMLElement>("[data-stage]");
+      const fallback = el.querySelector<HTMLElement>("[data-fallback]");
       if (!canvas || !sceneEl || !stage) return;
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        fallback?.removeAttribute("hidden");
+        canvas.remove();
         return;
       }
 
@@ -152,6 +160,8 @@ export function Frequency() {
           powerPreference: "high-performance",
         });
       } catch {
+        fallback?.removeAttribute("hidden");
+        canvas.remove();
         return;
       }
 
@@ -210,7 +220,7 @@ export function Frequency() {
         camera.aspect = w / Math.max(h, 1);
         camera.updateProjectionMatrix();
         uniforms.uPixelRatio.value = dpr;
-        const visH = 2 * Math.tan((camera.fov * Math.PI) / 360) * 6.2;
+        const visH = 2 * Math.tan((camera.fov * Math.PI) / 360) * camera.position.z;
         const visW = visH * camera.aspect;
         const target = Math.min(visW * 0.82, visH * 2.1);
         points.scale.setScalar(target / logoW);
@@ -258,7 +268,10 @@ export function Frequency() {
         if (disposed) return;
         const step = window.innerWidth < 900 ? 6 : 4;
         const sample = sampleMark(img, step);
-        if (sample.logo.length < 9) return;
+        if (sample.logo.length < 9) {
+          fallback?.removeAttribute("hidden");
+          return;
+        }
         logoW = sample.logoW;
         const geometry = new THREE.BufferGeometry();
         geometry.setAttribute("position", new THREE.BufferAttribute(sample.logo, 3));
@@ -268,10 +281,11 @@ export function Frequency() {
         geometry.setAttribute("aBright", new THREE.BufferAttribute(sample.bright, 1));
         points.geometry.dispose();
         points.geometry = geometry;
+        fallback?.setAttribute("hidden", "");
         fit();
         draw();
       };
-      img.onerror = () => undefined;
+      img.onerror = () => fallback?.removeAttribute("hidden");
 
       fit();
       draw();
@@ -312,6 +326,9 @@ export function Frequency() {
       <div className={styles.scene} data-scene>
         <div className={styles.sticky} data-stage>
           <canvas className={styles.canvas} data-canvas />
+          <div className={styles.mark} data-fallback hidden>
+            <EdenMark tone="bone" />
+          </div>
         </div>
       </div>
     </section>

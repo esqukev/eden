@@ -3,7 +3,7 @@ export const intro = {
   line: "Hacemos noches de electrónica.",
   image: "/images/intro/recinto.jpg",
   alt: "El recinto de Edén",
-  ticker: ["NOCHE", "FRECUENCIA", "CUERPO", "RECINTO", "PULSO", "EDÉN"],
+  ticker: ["HOUSE", "PULSO", "FRECUENCIA", "COMUNIDAD", "ESCENA", "UNDERGROUND", "EDÉN"],
 };
 
 export type UpcomingEvent = {
